@@ -4,8 +4,8 @@
   "metadata": {
     "_generator": {
       "name": "bicep",
-      "version": "0.15.31.15270",
-      "templateHash": "6640258515963112941"
+      "version": "0.17.1.54307",
+      "templateHash": "5793425870502524759"
     }
   },
   "parameters": {
@@ -33,8 +33,8 @@
   },
   "variables": {
     "resourceName": "[if(not(empty(parameters('name'))), replace(parameters('name'), ' ', '-'), format('a{0}', uniqueString(resourceGroup().id)))]",
-    "hostingPlanName": "[format('{0}-hp', variables('resourceName'))]",
-    "webAppName": "[format('{0}-web', variables('resourceName'))]"
+    "hostingPlanName": "[format('{0}-hp-{1}', variables('resourceName'), uniqueString(subscription().id))]",
+    "webAppName": "[format('{0}-web-{1}', variables('resourceName'), uniqueString(subscription().id))]"
   },
   "resources": [
     {
