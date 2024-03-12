@@ -13,7 +13,7 @@
       "type": "string",
       "defaultValue": "",
       "metadata": {
-        "description": "Name of the Function App"
+        "description": "Name of the Web App"
       }
     },
     "location": {
@@ -43,8 +43,8 @@
       "name": "[variables('hostingPlanName')]",
       "location": "[parameters('location')]",
       "sku": {
-        "tier": "Standard",
-        "name": "S1"
+        "tier": "Basic",
+        "name": "B1"
       },
       "tags": "[parameters('tags')]"
     },
