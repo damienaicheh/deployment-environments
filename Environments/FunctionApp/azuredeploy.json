@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.25.53.49325",
-      "templateHash": "16024393491195140895"
+      "templateHash": "2819888967788260743"
     }
   },
   "parameters": {
@@ -34,7 +34,6 @@
       "type": "string",
       "defaultValue": "dotnet-isolated",
       "allowedValues": [
-        "dotnet",
         "dotnet-isolated",
         "java",
         "node",
@@ -55,8 +54,7 @@
   },
   "variables": {
     "linexFxVersions": {
-      "dotnet": "DOTNET|6.0",
-      "dotnet-isolated": "DOTNET-ISOLATED|7.0",
+      "dotnet-isolated": "DOTNET-ISOLATED|8.0",
       "java": "JAVA|17",
       "node": "NODE|18",
       "powershell": "POWERSHELL|7.2",
@@ -98,7 +96,7 @@
       "name": "[variables('storageAcctName')]",
       "location": "[parameters('location')]",
       "sku": {
-        "name": "Standard_RAGRS"
+        "name": "Standard_LRS"
       },
       "kind": "StorageV2",
       "properties": {
