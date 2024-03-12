@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-@description('Name of the Function App')
+@description('Name of the Web App')
 param name string = ''
 
 @description('Location to deploy the environment resources')
@@ -13,7 +13,7 @@ var resourceName = !empty(name) ? replace(name, ' ', '-') : 'a${uniqueString(res
 param tags object = {}
 
 var hostingPlanName = '${resourceName}-hp'
-var webAppName = '${resourceName}-web'
+var webAppName = '${resourceName}-web-${uniqueString(resourceGroup().id)}', 0, 4)'
 
 resource hostingPlan 'Microsoft.Web/serverfarms@2022-03-01' = {
   name: hostingPlanName
