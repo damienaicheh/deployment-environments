@@ -12,7 +12,7 @@ var resourceName = !empty(name) ? replace(name, ' ', '-') : 'a${uniqueString(res
 @description('Tags to apply to environment resources')
 param tags object = {}
 
-var hostingPlanName = '${resourceName}-hp'
+var hostingPlanName = '${resourceName}-plan'
 var webAppName = '${resourceName}-web-${uniqueString(resourceGroup().id)}', 0, 4)'
 
 resource hostingPlan 'Microsoft.Web/serverfarms@2022-03-01' = {
