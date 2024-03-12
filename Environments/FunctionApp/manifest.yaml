@@ -23,7 +23,6 @@ parameters:
     description: 'The language worker runtime to load in the function app.'
     type: string
     allowed:
-      - 'dotnet'
       - 'dotnet-isolated'
       - 'java'
       - 'node'
