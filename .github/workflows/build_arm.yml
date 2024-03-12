@@ -1,11 +1,12 @@
 name: Bicep -> ARM
 
 on:
-  push:
-    branches: [main]
-    paths:
+  workflow_dispatch:
+  # push:
+    # branches: [main]
+    # paths:
       # only run if bicep files changed
-      - 'Environments/**/*.bicep'
+      # - 'Environments/**/*.bicep'
 
 jobs:
   build:
