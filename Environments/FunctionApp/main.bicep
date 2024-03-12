@@ -12,7 +12,6 @@ param supportsHttpsTrafficOnly bool = true
 
 @description('The language worker runtime to load in the function app')
 @allowed([
-  'dotnet'
   'dotnet-isolated'
   'java'
   'node'
@@ -25,8 +24,7 @@ param runtime string = 'dotnet-isolated'
 param tags object = {}
 
 var linexFxVersions = {
-  dotnet: 'DOTNET|6.0'
-  'dotnet-isolated': 'DOTNET-ISOLATED|7.0'
+  'dotnet-isolated': 'DOTNET-ISOLATED|8.0'
   java: 'JAVA|17'
   node: 'NODE|18'
   powershell: 'POWERSHELL|7.2'
@@ -66,7 +64,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2022-05-01' = {
   name: storageAcctName
   location: location
   sku: {
-    name: 'Standard_RAGRS'
+    name: 'Standard_LRS'
   }
   kind: 'StorageV2'
   properties: {
