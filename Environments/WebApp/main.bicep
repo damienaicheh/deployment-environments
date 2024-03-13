@@ -31,5 +31,7 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   properties: {
     serverFarmId: hostingPlan.id
   }
-  tags: tags
+  tags: union(tags, {
+    azd-service-name: 'api'
+  })
 }
