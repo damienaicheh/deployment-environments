@@ -56,7 +56,9 @@
       "properties": {
         "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('hostingPlanName'))]"
       },
-      "tags": "[parameters('tags')]",
+      "tags": "[parameters('tags'), {
+        "azd-service-name" = "api"
+      }]",
       "dependsOn": [
         "[resourceId('Microsoft.Web/serverfarms', variables('hostingPlanName'))]"
       ]
