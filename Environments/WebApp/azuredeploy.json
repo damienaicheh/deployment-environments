@@ -34,7 +34,8 @@
   "variables": {
     "resourceName": "[if(not(empty(parameters('name'))), replace(parameters('name'), ' ', '-'), format('a{0}', uniqueString(resourceGroup().id)))]",
     "hostingPlanName": "[format('{0}-hp', variables('resourceName'))]",
-    "webAppName": "[format('{0}-web-{1}', variables('resourceName'), uniqueString(resourceGroup().id)]"
+    "webAppName": "[format('{0}-web-{1}', variables('resourceName'), uniqueString(resourceGroup().id)]",
+    "customTag" : {"azd-service-name": "api"}
   },
   "resources": [
     {
@@ -56,9 +57,7 @@
       "properties": {
         "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('hostingPlanName'))]"
       },
-      "tags": "[parameters('tags'), {
-        "azd-service-name" = "api"
-      }]",
+      "tags": "[union(parameters('tags'),variables('customTag'))]", 
       "dependsOn": [
         "[resourceId('Microsoft.Web/serverfarms', variables('hostingPlanName'))]"
       ]
