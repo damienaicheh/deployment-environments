@@ -34,7 +34,7 @@
   "variables": {
     "resourceName": "[if(not(empty(parameters('name'))), replace(parameters('name'), ' ', '-'), format('a{0}', uniqueString(resourceGroup().id)))]",
     "hostingPlanName": "[format('{0}-hp', variables('resourceName'))]",
-    "webAppName": "[format('{0}-web-{1}', variables('resourceName'), uniqueString(resourceGroup().id))]",
+    "webAppName": "[format('{0}-web-{1}', variables('resourceName'), substring(uniqueString(resourceGroup().id), 0, 4))]",
     "customTag" : {"azd-service-name": "api"}
   },
   "resources": [
