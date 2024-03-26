@@ -8,7 +8,3 @@ parameters:
     name: "Resource Name"
     required: true
     type: "string"
-  - id: "location"
-    name: "Location"
-    required: true
-    type: "string"
