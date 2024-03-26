@@ -15,10 +15,6 @@ resource "azurerm_linux_web_app" "this" {
   site_config {}
 
   tags = {
-    tags = merge(
-    local.tags,
-    tomap({
-      "azd-service-name" = "api"
-    })
-  )
+    "azd-service-name" = "api"
+  }
 }
