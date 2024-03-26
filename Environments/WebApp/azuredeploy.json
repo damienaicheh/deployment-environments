@@ -45,20 +45,23 @@
       "location": "[parameters('location')]",
       "kind": "linux",
       "sku": {
-        "tier": "Standard",
-        "name": "S1"
+        "tier": "Basic",
+        "name": "B1"
       },
       "tags": "[parameters('tags')]"
     },
     {
       "type": "Microsoft.Web/sites",
-      "kind": "app",
+      "kind": "app,linux",
       "apiVersion": "2022-03-01",
       "name": "[variables('webAppName')]",
       "location": "[parameters('location')]",
       "properties": {
-        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('hostingPlanName'))]"
-      },
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('hostingPlanName'))]",
+        "siteConfig": {
+          "linuxFxVersion": "DOTNETCORE|8.0"
+        },
+      },      
       "tags": "[union(parameters('tags'),variables('customTag'))]", 
       "dependsOn": [
         "[resourceId('Microsoft.Web/serverfarms', variables('hostingPlanName'))]"
