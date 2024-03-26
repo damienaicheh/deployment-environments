@@ -51,6 +51,7 @@
     },
     {
       "type": "Microsoft.Web/sites",
+      "kind": "app,linux",
       "apiVersion": "2022-03-01",
       "name": "[variables('webAppName')]",
       "location": "[parameters('location')]",
