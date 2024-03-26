@@ -33,9 +33,7 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   location: location
   properties: {
     serverFarmId: hostingPlan.id
-    siteConfig: {
-      linuxFxVersion: 'DOTNETCORE|8.0'
-    }
+    siteConfig: {}
   }
   tags: union(tags, customTag)
 }
