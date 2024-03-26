@@ -4,8 +4,8 @@
   "metadata": {
     "_generator": {
       "name": "bicep",
-      "version": "0.24.24.22086",
-      "templateHash": "11278818517223830829"
+      "version": "0.5.6.12127",
+      "templateHash": "10602523904429381366"
     }
   },
   "parameters": {
@@ -20,7 +20,7 @@
       "type": "string",
       "defaultValue": "[resourceGroup().location]",
       "metadata": {
-        "description": "Location to deploy the environment resources"
+        "description": "Location for all resources."
       }
     },
     "tags": {
@@ -40,27 +40,39 @@
   "resources": [
     {
       "type": "Microsoft.Web/serverfarms",
-      "apiVersion": "2022-03-01",
+      "apiVersion": "2023-01-01",
       "name": "[variables('hostingPlanName')]",
       "location": "[parameters('location')]",
-      "kind": "linux",
       "sku": {
+        "name": "B1",
         "tier": "Basic",
-        "name": "B1"
-      },
-      "tags": "[parameters('tags')]"
+        "size": "B1",
+        "family": "B",
+        "capacity": 1
+       },
+      "kind": "linux",
+      "properties": {
+        "reserved": true
+      }
     },
     {
       "type": "Microsoft.Web/sites",
-      "kind": "app,linux",
-      "apiVersion": "2022-03-01",
+      "apiVersion": "2023-01-01",
       "name": "[variables('webAppName')]",
       "location": "[parameters('location')]",
       "properties": {
+        "httpsOnly": true,
         "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('hostingPlanName'))]",
-        "siteConfig": {}
-      },      
-      "tags": "[union(parameters('tags'),variables('customTag'))]", 
+        "siteConfig": {
+          "linuxFxVersion": "DOTNETCORE|8.0",
+          "minTlsVersion": "1.2",
+          "ftpsState": "FtpsOnly"
+        }
+      },
+      "identity": {
+        "type": "SystemAssigned"
+      },
+      "tags": "[union(parameters('tags'),variables('customTag'))]",
       "dependsOn": [
         "[resourceId('Microsoft.Web/serverfarms', variables('hostingPlanName'))]"
       ]

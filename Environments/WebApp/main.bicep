@@ -1,7 +1,7 @@
 @description('Name of the Web App')
 param name string = ''
 
-@description('Location to deploy the environment resources')
+@description('Location for all resources.')
 param location string = resourceGroup().location
 
 @description('Tags to apply to environment resources')
@@ -16,24 +16,36 @@ var customTag = {
   'azd-service-name': 'api'
 }
 
-resource hostingPlan 'Microsoft.Web/serverfarms@2022-03-01' = {
+resource hostingPlan 'Microsoft.Web/serverfarms@2023-01-01' = {
   name: hostingPlanName
   location: location
-  kind: 'linux'
   sku: {
-    tier: 'Basic'
     name: 'B1'
+    tier: 'Basic'
+    size: 'B1'
+    family: 'B'
+    capacity: 1
   }
-  tags: tags
+  kind: 'linux'
+  properties: {
+    reserved: true
+  }
 }
 
-resource webApp 'Microsoft.Web/sites@2022-03-01' = {
-  kind: 'app,linux'
+resource webApp 'Microsoft.Web/sites@2023-01-01' = {
   name: webAppName
   location: location
   properties: {
+    httpsOnly: true
     serverFarmId: hostingPlan.id
-    siteConfig: {}
+    siteConfig: {
+      linuxFxVersion: 'DOTNETCORE|8.0'
+      minTlsVersion: '1.2'
+      ftpsState: 'FtpsOnly'
+    }
+  }
+  identity: {
+    type: 'SystemAssigned'
   }
   tags: union(tags, customTag)
 }
