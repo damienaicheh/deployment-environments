@@ -45,8 +45,8 @@
       "location": "[parameters('location')]",
       "kind": "linux",
       "sku": {
-        "tier": "Basic",
-        "name": "B1"
+        "tier": "Standard",
+        "name": "S1"
       },
       "tags": "[parameters('tags')]"
     },
@@ -57,7 +57,7 @@
       "name": "[variables('webAppName')]",
       "location": "[parameters('location')]",
       "properties": {
-        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('hostingPlanName'))]",
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('hostingPlanName'))]"
       },
       "tags": "[union(parameters('tags'),variables('customTag'))]", 
       "dependsOn": [

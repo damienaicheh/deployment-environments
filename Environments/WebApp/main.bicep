@@ -13,15 +13,15 @@ var resourceName = !empty(name) ? replace(name, ' ', '-') : 'a${uniqueString(res
 param tags object = {}
 
 var hostingPlanName = '${resourceName}-plan'
-var webAppName = '${resourceName}-web-${uniqueString(resourceGroup().id)}', 0, 4)'
+var webAppName = '${resourceName}-web-${uniqueString(resourceGroup().id)}, 0, 4)'
 
 resource hostingPlan 'Microsoft.Web/serverfarms@2022-03-01' = {
   name: hostingPlanName
   location: location
   kind: 'linux'
   sku: {
-    tier: 'Basic'
-    name: 'B1'
+    tier: 'Standard'
+    name: 'S1'
   }
   tags: tags
 }
@@ -34,6 +34,6 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
     serverFarmId: hostingPlan.id
   }
   tags: union(tags, {
-    azd-service-name: 'api'
+    'azd-service-name': 'api'
   })
 }
