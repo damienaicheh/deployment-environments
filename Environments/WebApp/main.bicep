@@ -18,6 +18,7 @@ var webAppName = '${resourceName}-web-${uniqueString(resourceGroup().id)}', 0, 4
 resource hostingPlan 'Microsoft.Web/serverfarms@2022-03-01' = {
   name: hostingPlanName
   location: location
+  kind: 'linux'
   sku: {
     tier: 'Basic'
     name: 'B1'
